@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProyectosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +17,21 @@ Route::get('/', function () {
     return view('layout');
 });
 
+
+//CRUD views
+//Mostrar una lista de los proyectos
+//Route::get('/proyectos', function () {
+//    return view('proyectos/listadoProyectos');
+//});
+//Route::get('/proyectos', [ProyectosController::class, 'index']);
+//Route::get('/proyectos/create', [ProyectosController::class, 'create']);
+//Route::get('/proyectos/{proyecto}', [ProyectosController::class, 'show']);
+Route::resource('proyectos', ProyectosController::class);
+//Crear proyecto from
+//Route::get('/proyectos/create', function () {
+//    return view('proyectos/proyectosForm');
+//});
+
+//Detalle del proyecto
+//Formulario de edición del proyecto
+//Eliminar proyecto
