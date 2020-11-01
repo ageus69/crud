@@ -31,7 +31,9 @@ Route::resource('proyectos', ProyectosController::class);
 //Route::get('/proyectos/create', function () {
 //    return view('proyectos/proyectosForm');
 //});
-
+Route::get('/inicio', function () {
+    return view('inicio');
+});
 //Detalle del proyecto
 //Formulario de edición del proyecto
 //Eliminar proyecto

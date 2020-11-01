@@ -36,6 +36,20 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
+        //recibir datos
+
+        //validar
+        $request->validate([
+            'nombreProyecto' => 'required|min:5|max:128',
+            'nombrePersona' => 'required|min:5|max:64',
+            'correo' => 'required|min:5|max:64|email:rfc,dns',
+            'detalles' => 'required'
+        ]);
+
+        //guardar
+        Proyecto::create($request->all());
+
+        //redireccionar
         return redirect('proyectos');
     }
 
@@ -58,7 +72,7 @@ class ProyectosController extends Controller
      */
     public function edit(Proyecto $proyecto)
     {
-        //
+        return view('proyectos/proyectosForm', compact('proyecto'));
     }
 
     /**
@@ -70,7 +84,17 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, Proyecto $proyecto)
     {
-        //
+        //validar
+        $request->validate([
+            'nombreProyecto' => 'required|min:5|max:128',
+            'nombrePersona' => 'required|min:5|max:64',
+            'correo' => 'required|min:5|max:64|email:rfc,dns',
+            'detalles' => 'required'
+        ]);
+
+        Proyecto::where('id', $proyecto->id)->update($request->except('_method','_token'));
+
+        return redirect()->route('proyectos.show', [$proyecto]);
     }
 
     /**
@@ -81,6 +105,7 @@ class ProyectosController extends Controller
      */
     public function destroy(Proyecto $proyecto)
     {
-        //
+        $proyecto->delete();
+        return redirect()->route('proyectos.index');
     }
 }
